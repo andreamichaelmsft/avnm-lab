@@ -1,0 +1,207 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "resources": [
+    {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2024-03-01",
+      "name": "spokevms-nsg",
+      "location": "westus",
+      "properties": {
+        "securityRules": [
+          {
+            "name": "DenyVM1toVM2",
+            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+            "properties": {
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "*",
+              "sourceAddressPrefix": "10.0.49.0/24",
+              "destinationAddressPrefix": "10.0.50.0/24",
+              "access": "Deny",
+              "priority": 100,
+              "direction": "Inbound",
+              "sourcePortRanges": [],
+              "destinationPortRanges": [],
+              "sourceAddressPrefixes": [],
+              "destinationAddressPrefixes": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks",
+      "apiVersion": "2020-11-01",
+      "name": "[concat('SpokeVNet', add(copyIndex(), 1))]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkSecurityGroups', 'spokevms-nsg')]"
+      ],
+      "location": "westus",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "[concat('10.0.', add(copyIndex(), 1), '.0/24')]"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "default",
+            "properties": {
+              "addressPrefixes": [
+                "[concat('10.0.', add(copyIndex(), 1), '.0/24')]"
+              ],
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'spokevms-nsg')]"
+              }
+            },
+            "type": "Microsoft.Network/virtualNetworks/subnets"
+          }
+        ]
+      },
+      "tags": {
+        "env": "[if(less(copyIndex(), 25), 'nonTrusted', 'Trusted')]"
+      },
+      "copy": {
+        "name": "vnetLoop",
+        "count": 50
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks",
+      "apiVersion": "2020-11-01",
+      "name": "hubVNet",
+      "location": "westus",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "10.0.200.0/24"
+          ]
+        }
+      },
+      "tags": {
+        "env": "Hub"
+      }
+    },
+    {
+      "type": "Microsoft.Compute/virtualMachines",
+      "apiVersion": "2021-07-01",
+      "name": "vm1",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', 'SpokeVNet49')]",
+        "[resourceId('Microsoft.Network/networkInterfaces', 'vm1-nic0')]"
+      ],
+      "location": "westus",
+      "properties": {
+        "hardwareProfile": {
+          "vmSize": "Standard_DS1_v2"
+        },
+        "osProfile": {
+          "computerName": "vm1",
+          "adminUsername": "azureuser",
+          "adminPassword": "AzurePassword!159"
+        },
+        "storageProfile": {
+          "imageReference": {
+            "publisher": "Canonical",
+            "offer": "UbuntuServer",
+            "sku": "18.04-LTS",
+            "version": "latest"
+          },
+          "osDisk": {
+            "createOption": "FromImage"
+          }
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', 'vm1-nic0')]"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Network/networkInterfaces",
+      "apiVersion": "2021-05-01",
+      "name": "vm1-nic0",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', 'SpokeVNet49')]"
+      ],
+      "location": "westus",
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "subnet": {
+                "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', 'SpokeVNet49'), '/subnets/default')]"
+              },
+              "privateIPAllocationMethod": "Dynamic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Compute/virtualMachines",
+      "apiVersion": "2021-07-01",
+      "name": "vm2",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', 'SpokeVNet50')]",
+        "[resourceId('Microsoft.Network/networkInterfaces', 'vm2-nic0')]"
+      ],
+      "location": "westus",
+      "properties": {
+        "hardwareProfile": {
+          "vmSize": "Standard_DS1_v2"
+        },
+        "osProfile": {
+          "computerName": "vm2",
+          "adminUsername": "azureuser2",
+          "adminPassword": "AzurePassword!246"
+        },
+        "storageProfile": {
+          "imageReference": {
+            "publisher": "Canonical",
+            "offer": "UbuntuServer",
+            "sku": "18.04-LTS",
+            "version": "latest"
+          },
+          "osDisk": {
+            "createOption": "FromImage"
+          }
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', 'vm2-nic0')]"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Network/networkInterfaces",
+      "apiVersion": "2021-05-01",
+      "name": "vm2-nic0",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', 'SpokeVNet50')]"
+      ],
+      "location": "westus",
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig2",
+            "properties": {
+              "subnet": {
+                "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', 'SpokeVNet50'), '/subnets/default')]"
+              },
+              "privateIPAllocationMethod": "Dynamic"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
