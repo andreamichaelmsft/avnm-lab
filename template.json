@@ -32,7 +32,7 @@
     },
     {
       "type": "Microsoft.Network/virtualNetworks",
-      "apiVersion": "2020-11-01",
+      "apiVersion": "2024-05-01",
       "name": "[concat('SpokeVNet', add(copyIndex(), 1))]",
       "dependsOn": [
         "[resourceId('Microsoft.Network/networkSecurityGroups', 'spokevms-nsg')]"
@@ -69,7 +69,7 @@
     },
     {
       "type": "Microsoft.Network/virtualNetworks",
-      "apiVersion": "2020-11-01",
+      "apiVersion": "2024-05-01",
       "name": "hubVNet",
       "location": "westus",
       "properties": {
@@ -85,7 +85,7 @@
     },
     {
       "type": "Microsoft.Compute/virtualMachines",
-      "apiVersion": "2021-07-01",
+      "apiVersion": "2024-07-01",
       "name": "vm1",
       "dependsOn": [
         "[resourceId('Microsoft.Network/virtualNetworks', 'SpokeVNet49')]",
@@ -123,7 +123,7 @@
     },
     {
       "type": "Microsoft.Network/networkInterfaces",
-      "apiVersion": "2021-05-01",
+      "apiVersion": "2024-05-01",
       "name": "vm1-nic0",
       "dependsOn": [
         "[resourceId('Microsoft.Network/virtualNetworks', 'SpokeVNet49')]"
@@ -145,7 +145,7 @@
     },
     {
       "type": "Microsoft.Compute/virtualMachines",
-      "apiVersion": "2021-07-01",
+      "apiVersion": "2024-07-01",
       "name": "vm2",
       "dependsOn": [
         "[resourceId('Microsoft.Network/virtualNetworks', 'SpokeVNet50')]",
@@ -183,7 +183,7 @@
     },
     {
       "type": "Microsoft.Network/networkInterfaces",
-      "apiVersion": "2021-05-01",
+      "apiVersion": "2024-05-01",
       "name": "vm2-nic0",
       "dependsOn": [
         "[resourceId('Microsoft.Network/virtualNetworks', 'SpokeVNet50')]"
