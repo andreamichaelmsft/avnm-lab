@@ -154,7 +154,7 @@ You're trying to plan for another hub and spoke topology between your hub virtua
     1. Select the **Associate resources** button and associate any 5 of the spoke virtual networks and the 1 hub virtual network (named **hubVNet**).
     1. **Refresh** the pane.
     
-    >[!knowledge] Notice how you can also allocate from this IP address pool by carving out address space for child pools and for static CIDR blocks to represent on-premises or non-Azure resources.
+    > Notice how you can also allocate from this IP address pool by carving out address space for child pools and for static CIDR blocks to represent on-premises or non-Azure resources.
 
 1. What happens when you need to create another virtual network? During creation, you can actually set up the virtual network's IP address space from the available IP address space in this pool.
     1. Search in the Azure Portal for `Virtual networks` and create a new one in your resource group and West US region.
