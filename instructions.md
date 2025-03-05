@@ -1,11 +1,26 @@
 # Welcome to our lab for virtual network management at scale with AVNM!
 
-
 > Check out [Azure Virtual Network Manager's public documentation](https://learn.microsoft.com/en-us/azure/virtual-network-manager/) for more info! It also contains how-to guides for all available features in the Azure Portal if you encounter issues on the lab's steps.
 
-## Deploy the ARM template.
+## Check prerequisites and deploy the lab's ARM template.
 
-STEPS TO BE ADDED
+Before you get started with this lab, you'll want to check whether you meet the following prerequisites:
+
+1. [General prerequisites](https://learn.microsoft.com/en-us/azure/virtual-network-manager/create-virtual-network-manager-portal?tabs=manualmembership#prerequisites)
+
+2. [Network group-related permissions](https://learn.microsoft.com/en-us/azure/virtual-network-manager/concept-network-groups#network-groups-and-azure-policy)
+
+3. [Azure Policy permissions](https://learn.microsoft.com/en-us/azure/virtual-network-manager/concept-azure-policy-integration#required-permissions)
+
+If you're confident you have the right set of permissions and access level to the subscription(s) where you want to test AVNM, then go ahead and deploy the [lab's ARM template](template.json). This template will deploy virtual networks and their subnets, a network security group, and virtual machines and their network interface cards.
+
+> Remember to clean up these resources after your lab -- especially the VMs -- for security and cost purposes!
+
+1. Log in to the Azure Portal and search for `Deploy a custom template`.
+
+2. Select `Build your own template in the editor`, copy-paste the contents of the lab's ARM template, and select the **Save** button.
+
+3. Select the desired subscription, resource group, and region where you want to deploy this template's resources, then **Review + create**.
 
 ## Create your Azure Virtual Network Manager instance.
 
@@ -259,5 +274,4 @@ You're confident in your AVNM setup, but somehow some traffic still isn't being 
 ---
 
 ## Thanks for participating in our lab!
-
-We hope you enjoyed this activity and feel confident about using AVNM. Please fill out [**this form**](https://forms.office.com/r/f01RJ5f0Fz) if you're interested in engaging with our team and embark on a journey to simplify your Azure network management!
+### Remember to clean up all network manager and template resources after your lab for security and cost purposes!
