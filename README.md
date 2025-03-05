@@ -22,6 +22,8 @@ If you're confident you have the right set of permissions and access level to th
 
 3. Select the desired subscription, resource group, and region where you want to deploy this template's resources, then **Review + create**.
 
+---
+
 ## Create your Azure Virtual Network Manager instance.
 
 You're tasked with seting up connectivity, security, routing, and more among several virtual networks. To achieve this, you need an instance of Azure Virtual Network Manager (AVNM) -- a network manager.
