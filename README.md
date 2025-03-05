@@ -26,7 +26,7 @@ If you're confident you have the right set of permissions and access level to th
 
 ## Create your Azure Virtual Network Manager instance.
 
-You're tasked with seting up connectivity, security, routing, and more among several virtual networks. To achieve this, you need an instance of Azure Virtual Network Manager (AVNM) -- a network manager.
+You're tasked with setting up connectivity, security, routing, and more among several virtual networks. To achieve this, you need an instance of Azure Virtual Network Manager (AVNM) -- a network manager.
 
 1. In the Azure Portal, search for `Network managers` and create a new one. Use the following values for the **Basics** tab's fields:
 
@@ -191,11 +191,11 @@ Upon deployment, AVNM will create the user-defined routes (UDRs) for all your no
 
 ## Manage the IP addresses of your virtual networks.
 
-Now let's take a look outside of AVNM's group-configure-deploy mechanisms. AVNM's IP address management (IPAM) feature lets you create pools for IP address planning, automatically assign non-overlapping CIDR addresses to Azure resources, and prevent address space conflicts across on-premises and multicloud environments.
+Now let's take a look outside of AVNM's group-configure-deploy mechanisms. AVNM's IP address management (IPAM) feature lets you create pools for IP address planning, automatically assign non-overlapping CIDR addresses to Azure resources, and prevent address space conflicts across on-premises and multi-cloud environments.
 
 You're trying to plan for another hub and spoke topology between your hub virtual network and 5 spoke virtual networks. You know you'll also have to create a new virtual network and connect it to this topology. Let's walk through how IPAM can help you ensure there are no overlapping address spaces between the virtual networks that you want to connect in this topology, and even create a new spoke virtual network with guaranteed non-overlapping address space.
 
-1. Inside your network manager, expand the **IP address management (Preview)** in the left-hand menu and navigate to the **IP address pools (Preview)** blade.
+1. Inside your network manager, expand the **IP address management** in the left-hand menu and navigate to the **IP address pools** blade.
 
 1. **Create** an IP address pool.
    
@@ -235,7 +235,7 @@ You're confident in your AVNM setup, but somehow some traffic still isn't being 
 
 1. Navigate back to your network manager by searching in the Azure Portal for its name or by searching for `Network managers`.
 
-1. Inside your network manager, expand the **Virtual network verifier (Preview)** in the left-hand menu and navigate to the **Verifier workspaces (Preview)** blade.
+1. Inside your network manager, expand the **Virtual network verifier** in the left-hand menu and navigate to the **Verifier workspaces** blade.
 
 1. **Create** a verifier workspace.
 
