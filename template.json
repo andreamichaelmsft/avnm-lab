@@ -6,7 +6,7 @@
       "type": "Microsoft.Network/networkSecurityGroups",
       "apiVersion": "2024-03-01",
       "name": "spokevms-nsg",
-      "location": "westus",
+      "location": "[resourceGroup().location]",
       "properties": {
         "securityRules": [
           {
@@ -37,7 +37,7 @@
       "dependsOn": [
         "[resourceId('Microsoft.Network/networkSecurityGroups', 'spokevms-nsg')]"
       ],
-      "location": "westus",
+      "location": "[resourceGroup().location]",
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
@@ -71,7 +71,7 @@
       "type": "Microsoft.Network/virtualNetworks",
       "apiVersion": "2024-05-01",
       "name": "hubVNet",
-      "location": "westus",
+      "location": "[resourceGroup().location]",
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
@@ -91,7 +91,7 @@
         "[resourceId('Microsoft.Network/virtualNetworks', 'SpokeVNet49')]",
         "[resourceId('Microsoft.Network/networkInterfaces', 'vm1-nic0')]"
       ],
-      "location": "westus",
+      "location": "[resourceGroup().location]",
       "properties": {
         "hardwareProfile": {
           "vmSize": "Standard_DS1_v2"
@@ -128,7 +128,7 @@
       "dependsOn": [
         "[resourceId('Microsoft.Network/virtualNetworks', 'SpokeVNet49')]"
       ],
-      "location": "westus",
+      "location": "[resourceGroup().location]",
       "properties": {
         "ipConfigurations": [
           {
@@ -151,7 +151,7 @@
         "[resourceId('Microsoft.Network/virtualNetworks', 'SpokeVNet50')]",
         "[resourceId('Microsoft.Network/networkInterfaces', 'vm2-nic0')]"
       ],
-      "location": "westus",
+      "location": "[resourceGroup().location]",
       "properties": {
         "hardwareProfile": {
           "vmSize": "Standard_DS1_v2"
@@ -188,7 +188,7 @@
       "dependsOn": [
         "[resourceId('Microsoft.Network/virtualNetworks', 'SpokeVNet50')]"
       ],
-      "location": "westus",
+      "location": "[resourceGroup().location]",
       "properties": {
         "ipConfigurations": [
           {
