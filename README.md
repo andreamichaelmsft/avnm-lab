@@ -161,6 +161,8 @@ All of your virtual networks now have security guardrails! Downstream NSGs will 
 
 Don't forget to route traffic between your non-trusted virtual networks through the Azure Firewall residing in your hub virtual network! 
 
+> The ARM template does **_not_** create an Azure Firewall instance. This is intentional to prevent undesired costs and potential misconfiguration. This section of the activity aims to semantically demonstrate how you would be able to reference your Azure Firewall in AVNM's routing rule.
+
 1. Inside your network manager, expand the **Settings** in the left-hand menu and navigate to the **Configurations** blade.
 
 1. Create a **Routing configuration**.
@@ -174,6 +176,8 @@ Don't forget to route traffic between your non-trusted virtual networks through 
             1. The **Destination** should describe the default route (**IP address 0.0.0.0/0**).
                
             1. The **Next hop** should be a **Virtual appliance** and its address will be `10.0.3.68`, which represents the Azure Firewall's IP address.
+      
+               > As mentioned above, the ARM template does not create a Azure Firewall instance. This IP is purely an example.
                
             1. **Add** the routing rule to the routing rule collection.
                
